@@ -23,7 +23,7 @@
 
     p {
       font-size: 22px;
-      margin: 15px 0;
+      margin: 10px 0;
     }
 
     .button {
@@ -35,7 +35,7 @@
       cursor: pointer;
       font-size: 18px;
       transition: background 0.3s ease;
-      margin-top: 25px;
+      margin-top: 20px;
     }
 
     .button:hover {
@@ -48,6 +48,14 @@
       border-radius: 20px;
       box-shadow: 0 4px 15px rgba(0,0,0,0.2);
       text-align: center;
+      max-width: 400px;
+    }
+
+    .tip {
+      margin-top: 25px;
+      font-style: italic;
+      color: #555;
+      font-size: 18px;
     }
   </style>
 </head>
@@ -57,10 +65,16 @@
     <p id="timeStatus">Loading current time...</p>
     <p id="activeStatus">Calculating best time to post...</p>
     <p id="nextTime">Next Best Time to Post: Calculating...</p>
-    <button class="button" onclick="checkBestTime()">Check Now</button>
+    <p class="tip" id="dailyTip">Your daily tip will appear here...</p>
+    <button class="button" onclick="checkBestTime()">Refresh Now</button>
   </div>
 
   <script>
+    function updateClock() {
+      const now = new Date();
+      document.getElementById('timeStatus').innerText = "Current Time: " + now.toLocaleTimeString();
+    }
+
     function checkBestTime() {
       const now = new Date();
       const hour = now.getHours();
@@ -98,15 +112,32 @@
         nextSlot = "6 AM - 9 AM";
       }
 
-      document.getElementById('timeStatus').innerText = "Current Time: " + now.toLocaleTimeString();
       document.getElementById('activeStatus').innerText = `${activePercent}% active followers. ${message}`;
       document.getElementById('nextTime').innerText = `Next Best Time to Post: ${nextSlot}`;
     }
 
-    window.onload = checkBestTime;
+    function showDailyTip() {
+      const tips = [
+        "💡 Tip: Post Stories between 7 PM - 9 PM for higher reach.",
+        "💡 Tip: Use trending hashtags to boost visibility.",
+        "💡 Tip: Evening Reels often get more views.",
+        "💡 Tip: Keep your captions short and engaging.",
+        "💡 Tip: Post consistently to stay on top."
+      ];
+      const randomTip = tips[Math.floor(Math.random() * tips.length)];
+      document.getElementById('dailyTip').innerText = randomTip;
+    }
+
+    window.onload = () => {
+      checkBestTime();
+      showDailyTip();
+      updateClock();
+      setInterval(updateClock, 1000);
+    };
   </script>
 </body>
 </html>
+
 
 
 
