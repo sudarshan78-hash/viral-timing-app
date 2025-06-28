@@ -55,45 +55,55 @@
   <div class="card">
     <h1>Viral Timing Dashboard</h1>
     <p id="timeStatus">Loading current time...</p>
-    <p id="activeStatus">Calculating best time to post...</p>
+    <p id="nextTime">Next Best Time to Post: Calculating...</p>
     <button class="button" onclick="checkBestTime()">Check Now</button>
   </div>
 
   <script>
-    function checkBestTime() {
-      const now = new Date();
-      const hour = now.getHours();
-      let activePercent = 50;
-      let message = "Average time to post.";
+function checkBestTime() {
+  const now = new Date();
+  const hour = now.getHours();
+  let activePercent = 50;
+  let message = "Average time to post.";
+  let nextSlot = "9 AM - 12 PM";
 
-      if (hour >= 6 && hour < 9) {
-        activePercent = 40;
-        message = "Early morning - decent time to post.";
-      } else if (hour >= 9 && hour < 12) {
-        activePercent = 55;
-        message = "Mid-morning - okay time to post.";
-      } else if (hour >= 12 && hour < 15) {
-        activePercent = 70;
-        message = "Afternoon - good time to post.";
-      } else if (hour >= 15 && hour < 18) {
-        activePercent = 80;
-        message = "Late afternoon - very good time to post.";
-      } else if (hour >= 18 && hour < 21) {
-        activePercent = 90;
-        message = "Evening - best time to post!";
-      } else if (hour >= 21 && hour < 24) {
-        activePercent = 75;
-        message = "Late night - good time to post.";
-      } else {
-        activePercent = 30;
-        message = "Late night - low activity.";
-      }
+  if (hour >= 6 && hour < 9) {
+    activePercent = 40;
+    message = "Early morning - decent time to post.";
+    nextSlot = "12 PM - 3 PM";
+  } else if (hour >= 9 && hour < 12) {
+    activePercent = 55;
+    message = "Mid-morning - okay time to post.";
+    nextSlot = "3 PM - 6 PM";
+  } else if (hour >= 12 && hour < 15) {
+    activePercent = 70;
+    message = "Afternoon - good time to post.";
+    nextSlot = "6 PM - 9 PM";
+  } else if (hour >= 15 && hour < 18) {
+    activePercent = 80;
+    message = "Late afternoon - very good time to post.";
+    nextSlot = "6 PM - 9 PM";
+  } else if (hour >= 18 && hour < 21) {
+    activePercent = 90;
+    message = "Evening - best time to post!";
+    nextSlot = "Tomorrow 6 AM - 9 AM";
+  } else if (hour >= 21 && hour < 24) {
+    activePercent = 75;
+    message = "Late night - good time to post.";
+    nextSlot = "Tomorrow 6 AM - 9 AM";
+  } else {
+    activePercent = 30;
+    message = "Late night - low activity.";
+    nextSlot = "6 AM - 9 AM";
+  }
 
-      document.getElementById('timeStatus').innerText = "Current Time: " + now.toLocaleTimeString();
-      document.getElementById('activeStatus').innerText = activePercent + "% active followers. " + message;
-    }
+  document.getElementById('timeStatus').innerText = "Current Time: " + now.toLocaleTimeString();
+  document.getElementById('activeStatus').innerText = `${activePercent}% active followers. ${message}`;
+  document.getElementById('nextTime').innerText = `Next Best Time to Post: ${nextSlot}`;
+}
 
-    window.onload = checkBestTime;
+window.onload = checkBestTime;
+
   </script>
 </body>
 </html>
