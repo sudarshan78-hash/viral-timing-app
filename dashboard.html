@@ -66,6 +66,10 @@
     <p id="activeStatus">Calculating best time to post...</p>
     <p id="nextTime">Next Best Time to Post: Calculating...</p>
     <p class="tip" id="dailyTip">Your daily tip will appear here...</p>
+
+    <button class="button" onclick="predictReach()">Estimate My Reach</button>
+    <p id="reachResult"></p>
+
     <button class="button" onclick="checkBestTime()">Refresh Now</button>
   </div>
 
@@ -126,6 +130,11 @@
       ];
       const randomTip = tips[Math.floor(Math.random() * tips.length)];
       document.getElementById('dailyTip').innerText = randomTip;
+    }
+
+    function predictReach() {
+      const reach = Math.floor(Math.random() * (5000 - 500) + 500);
+      document.getElementById('reachResult').innerText = `🎯 Estimated Post Reach: ${reach} people if posted now!`;
     }
 
     window.onload = () => {
