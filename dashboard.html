@@ -67,6 +67,14 @@
       }
 
       document.getElementById('timeStatus').innerText = "Current Time: " + now.toLocaleTimeString();
-      document.getElementById('activeStatus').innerText = a
+      document.getElementById('activeStatus').innerText = activePercent + "% active followers. " + message;
+    }
+
+    // Automatically show when page loads
+    window.onload = checkBestTime;
+  </script>
+</body>
+</html>
+
 
 
